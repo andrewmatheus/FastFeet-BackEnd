@@ -3,7 +3,7 @@
     <br>
     <h2>FastFeet BackEnd</h2>
     <br>
-    <img alt="FastFeet" src="https://res.cloudinary.com/directmidiasoftwares/image/upload/v1580238067/GitHub/logo_fastfeet_zq0fqp.png /> 
+    <img alt="FastFeet" src="https://res.cloudinary.com/directmidiasoftwares/image/upload/v1580238067/GitHub/logo_fastfeet_zq0fqp.png" /> 
 </h1>
 
 ## :rocket: Technologies
