@@ -70,6 +70,16 @@ class RecipientController {
       return res.status(400).json({ error: 'Recipient not found' });
     }
 
+    if (name) {
+      const existName = await Recipient.findOne({
+        where: { name },
+      });
+
+      if (existName) {
+        return res.status(400).json({ error: 'Recipient name already exist!' });
+      }
+    }
+
     const {
       street,
       number,
