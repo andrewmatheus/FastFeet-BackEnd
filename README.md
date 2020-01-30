@@ -13,6 +13,7 @@ This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketse
 -  [Express](https://expressjs.com/)
 -  [Nodemon](https://github.com/remy/nodemon#nodemon/)
 -  [Sucrase](https://github.com/alangpierce/sucrase)
+-  [EditorConfig](https://editorconfig.org/)
 -  [DotEnv](https://github.com/motdotla/dotenv)
 -  [Yup](https://github.com/jquense/yup)
 -  [Eslint](https://eslint.org/docs/user-guide/getting-started)
