@@ -6,6 +6,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import RecipientController from './app/controllers/RecipientController';
 import CourierController from './app/controllers/CourierController';
+import OrderController from './app/controllers/OrderController';
 
 import authMiddleware from './app/middleware/auth';
 
@@ -25,6 +26,12 @@ routes.get('/couriers', CourierController.index);
 routes.post('/couriers', CourierController.store);
 routes.put('/couriers/:id', CourierController.update);
 routes.delete('/couriers/:id', CourierController.delete);
+
+// Order
+routes.get('/orders', OrderController.index);
+routes.post('/orders', OrderController.store);
+routes.put('/orders/:id', OrderController.update);
+routes.delete('/orders/:id', OrderController.delete);
 
 // Upload files
 routes.post('/files', upload.single('file'), FileController.store);
