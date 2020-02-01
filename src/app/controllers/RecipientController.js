@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
+import User from '../models/User';
 
 class RecipientController {
   async store(req, res) {
@@ -23,6 +24,17 @@ class RecipientController {
 
     if (recipientExist) {
       return res.status(400).json({ error: 'Recipient already exists.' });
+    }
+
+    /**
+     * Check user is administrator
+     */
+    const user = await User.findByPk(req.userId);
+
+    if (!user.profile_admin) {
+      return res
+        .status(405)
+        .json({ error: 'Action allowed for administrators only!' });
     }
 
     const {
@@ -78,6 +90,17 @@ class RecipientController {
       if (existName) {
         return res.status(400).json({ error: 'Recipient name already exist!' });
       }
+    }
+
+    /**
+     * Check user is administrator
+     */
+    const user = await User.findByPk(req.userId);
+
+    if (!user.profile_admin) {
+      return res
+        .status(405)
+        .json({ error: 'Action allowed for administrators only!' });
     }
 
     const {
