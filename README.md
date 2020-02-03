@@ -1,7 +1,7 @@
 <h1 align="center">
     <img alt="GoStack Logo" src="https://res.cloudinary.com/directmidiasoftwares/image/upload/v1580224540/GitHub/bootcamp10_z7ct8j.png" />
     <br>
-    <h2 align="center">FastFeet BackEnd</h2>
+    <h2 align="center">FastFeet API</h2>
     <br>
     <img alt="FastFeet" src="https://res.cloudinary.com/directmidiasoftwares/image/upload/v1580238067/GitHub/logo_fastfeet_zq0fqp.png" /> 
 </h1>
