@@ -19,6 +19,13 @@ class Recipient extends Model {
 
     return this;
   }
+
+  static associate(models) {
+    this.hasMany(models.Order, {
+      foreignKey: 'recipient_id',
+      as: 'recipients',
+    });
+  }
 }
 
 export default Recipient;

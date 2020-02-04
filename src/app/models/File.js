@@ -20,6 +20,13 @@ class File extends Model {
 
     return this;
   }
+
+  static associate(models) {
+    this.hasMany(models.Order, {
+      foreignKey: 'signature_id',
+      as: 'files',
+    });
+  }
 }
 
 export default File;
