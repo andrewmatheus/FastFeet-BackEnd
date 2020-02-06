@@ -65,7 +65,6 @@ class OrderController {
       recipient_id,
       deliveryman_id,
       signature_id: signature_id || null,
-      start_date: new Date(),
     });
 
     await Queue.add(NewDelivery.key, { courier, order });

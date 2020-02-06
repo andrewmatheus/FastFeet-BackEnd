@@ -9,11 +9,11 @@ class CancellationOrderMail {
     const { order } = data;
 
     await Mail.sendMail({
-      to: `${order.courier.name}<${order.courier.email}>`,
+      to: `${order.deliveryman.name}<${order.deliveryman.email}>`,
       subject: 'Delivery Canceled',
       template: 'cancellationOrder',
       context: {
-        courier: order.courier.name,
+        deliveryman: order.deliveryman.name,
         order_id: order.id,
         product: order.product,
       },
