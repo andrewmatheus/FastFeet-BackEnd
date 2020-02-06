@@ -35,11 +35,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/andrewmatheus/gostack10-desafio01.git
+$ git clone https://github.com/andrewmatheus/FastFeet-BackEnd.git
 
 # Go into the repository
-$ cd gostack10-desafio01
-
+$ cd FastFeet-BackEnd
 # Install dependencies
 $ yarn install
 
