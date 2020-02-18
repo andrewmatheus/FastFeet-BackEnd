@@ -17,60 +17,22 @@ class DeliverymanController {
       return res.status(400).json({ error: 'Courier not found!' });
     }
 
-    if (!delivered) {
-      const orders = await Order.findAll({
-        where: {
-          deliveryman_id: id,
-          canceled_at: null,
-          end_date: null,
-        },
-        order: ['id'],
-        include: [
-          {
-            association: 'deliveryman',
-            attributes: ['name', 'email'],
-            include: [
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['path', 'url'],
-              },
-            ],
-          },
-          {
-            association: 'recipient',
-            required: false,
-            attributes: [
-              'id',
-              'name',
-              'street',
-              'number',
-              'complement',
-              'state',
-              'city',
-              'zip_code',
-            ],
-          },
-          {
-            model: File,
-            as: 'signature',
-            attributes: ['path', 'url'],
-          },
-        ],
-        limit: 20,
-        offset: (page - 1) * 20,
-      });
+    let where;
 
-      return res.json(orders);
-    }
-    const orders = await Order.findAll({
-      where: {
+    if (delivered) {
+      where = {
         deliveryman_id: id,
         canceled_at: null,
         end_date: {
           [Op.lte]: new Date(),
         },
-      },
+      };
+    } else {
+      where = { deliveryman_id: id, canceled_at: null, end_date: null };
+    }
+
+    const orders = await Order.findAll({
+      where,
       order: ['id'],
       include: [
         {
