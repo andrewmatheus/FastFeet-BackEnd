@@ -21,6 +21,12 @@ This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketse
 -  [Sequelize](https://sequelize.org/v5/manual/getting-started.html)
 -  [bcryptjs](https://www.npmjs.com/package/bcrypt)
 -  [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+-  [multer](https://github.com/expressjs/multer)
+-  [crypto](https://nodejs.org/api/crypto.html)
+-  [date-fns@next](https://date-fns.org/docs/Getting-Started)
+-  [nodemailer](https://nodemailer.com/about/)
+-  [Handlebars.js](https://handlebarsjs.com/guide/#what-is-handlebars)
+-  [bee-queue](https://github.com/bee-queue/bee-queue)
 
 
 ## :information_source: How To Use
@@ -29,11 +35,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/andrewmatheus/gostack10-desafio01.git
+$ git clone https://github.com/andrewmatheus/FastFeet-BackEnd.git
 
 # Go into the repository
-$ cd gostack10-desafio01
-
+$ cd FastFeet-BackEnd
 # Install dependencies
 $ yarn install
 
@@ -44,8 +49,17 @@ $ Create archive .env, fill in data as .env.example
 $ yarn sequelize db:migrate
 $ yarn sequelize db:seed:all
 
+#Install Redis
+docker run --name redis -p 6379:6379 -d -t redis:alpine
+
+#Create account
+mailtrap.io
+
 # Run the app
 $ yarn dev
+
+# Run the send mail
+$ yarn queue
 ```
 
 ## :memo: License
