@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -9,9 +10,14 @@ import NewDelivery from '../job/NewDeliveryMail';
 
 class OrderController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, name = '' } = req.query;
 
     const order = await Order.findAll({
+      where: {
+        product: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
       attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
       include: [
         {

@@ -1,8 +1,52 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+
 import Recipient from '../models/Recipient';
 import User from '../models/User';
 
 class RecipientController {
+  async index(req, res) {
+    const { page = 1, name = '' } = req.query;
+
+    const recipient = await Recipient.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+      order: ['id'],
+      attributes: [
+        'id',
+        'name',
+        'street',
+        'number',
+        'complement',
+        'state',
+        'city',
+        'zip_code',
+      ],
+      limit: 20,
+      offset: (page - 1) * 20,
+    });
+
+    if (!recipient) {
+      return res.status(400).json({ error: 'Courier does not exist!' });
+    }
+
+    /**
+     * Check user is administrator
+     */
+    const user = await User.findByPk(req.userId);
+
+    if (!user.profile_admin) {
+      return res
+        .status(405)
+        .json({ error: 'Action allowed for administrators only!' });
+    }
+
+    return res.json(recipient);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),

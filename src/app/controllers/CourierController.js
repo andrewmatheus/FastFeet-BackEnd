@@ -1,13 +1,20 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
+
 import Courier from '../models/Courier';
 import File from '../models/File';
 import User from '../models/User';
 
 class CourierController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, name = '' } = req.query;
 
     const courier = await Courier.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
       order: ['id'],
       attributes: ['id', 'name', 'email'],
       limit: 20,
