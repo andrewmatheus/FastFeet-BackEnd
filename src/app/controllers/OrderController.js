@@ -18,12 +18,13 @@ class OrderController {
           [Op.iLike]: `%${name}%`,
         },
       },
+      order: ['id'],
       attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
       include: [
         {
           association: 'recipient',
           required: false,
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city', 'state'],
         },
         {
           association: 'deliveryman',
@@ -33,7 +34,7 @@ class OrderController {
         {
           association: 'signature',
           required: false,
-          attributes: ['name', 'path'],
+          attributes: ['name', 'url', 'path'],
         },
       ],
       limit: 10,
