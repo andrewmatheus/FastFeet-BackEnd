@@ -54,7 +54,7 @@ class OrderController {
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validations errors' });
 
-    const { product, recipient_id, deliveryman_id, signature_id } = req.body;
+    const { product, recipient_id, deliveryman_id } = req.body;
 
     const recipient = await Recipient.findByPk(recipient_id);
     if (!recipient) {
@@ -71,7 +71,7 @@ class OrderController {
       product,
       recipient_id,
       deliveryman_id,
-      signature_id: signature_id || null,
+      signature_id: courier.avatar_id || null,
     });
 
     await Queue.add(NewDelivery.key, { courier, order });
@@ -97,7 +97,7 @@ class OrderController {
       return res.json({ message: 'Order not found!' });
     }
 
-    const { product, recipient_id, deliveryman_id, signature_id } = req.body;
+    const { product, recipient_id, deliveryman_id } = req.body;
 
     if (recipient_id) {
       const recipient = await Recipient.findByPk(recipient_id);
@@ -105,20 +105,22 @@ class OrderController {
         return res.status(400).json({ error: 'Recipient not found!' });
       }
     }
-
+    let signature_id_courier = null;
     if (deliveryman_id) {
       const courier = await Courier.findByPk(deliveryman_id);
 
       if (!courier) {
         return res.status(400).json({ error: 'Courier not found!' });
       }
+
+      signature_id_courier = courier.avatar_id;
     }
 
     await order.update({
       product,
       recipient_id,
       deliveryman_id,
-      signature_id: signature_id || null,
+      signature_id: signature_id_courier || null,
     });
 
     return res.json(order);
